@@ -1,0 +1,25 @@
+"==== REQUEST BUILDER ====", "==== REQUEST BUILDER ===="
+
+"Error processing payment information", "Erro ao processar as informações do pagamento."
+"Error processing boleto payment information", "Erro ao processar as informações de pagamento do boleto."
+"Error processing payer information. Please verify address information and taxvat.", "Erro ao processar as informações do pagador. Por favor verifique as informações de endereços e CPF/CNPJ."
+
+"==== FIELDS VALIDATION ====", "==== FIELDS VALIDATION ===="
+
+"Cannot determinate customer person type", "Não foi possível determinar o tipo de pessoa do cliente"
+"Taxvat is invalid", "CPF/CNPJ é inválido"
+
+"==== API INTER ERROR ====", "==== API INTER ERROR ===="
+
+"API Inter: Invalid data. Check customer and address data.", "API Inter: Dados inválidos. Verifique os dados de cliente e endereço."
+"API Inter: Not authorized. Check configured credentials.", "API Inter: Não autorizado. Verifique as credenciais configuradas."
+"API Inter: Requested resource not found", "API Inter: Recurso solicitado não encontrado."
+"API Inter: Unexpected error", "API Inter: Erro não esperado."
+
+"==== ACTIONS ====", "==== ACTIONS ===="
+
+"PRINT BOLETO", "IMPRIMIR BOLETO"
+
+"==== LABELS ====", "==== LABELS ===="
+
+"Taxvat", "CPF/CNPJ"

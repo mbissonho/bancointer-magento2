@@ -1,0 +1,8 @@
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/error_mapping.xsd">
+    <message_list>
+        <message code="400" translate="true">API Inter: Invalid data. Check customer and address data.</message>
+        <message code="403" translate="true">API Inter: Not authorized. Check configured credentials.</message>
+        <message code="404" translate="true">API Inter: Requested resource not found</message>
+        <message code="500" translate="true">API Inter: Unexpected error</message>
+    </message_list>
+</mapping>

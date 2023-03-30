@@ -1,0 +1,19 @@
+<?php
+
+/* @var \Mbissonho\BancoInter\Block\Adminhtml\Form $block */
+
+$code = $block->getMethodCode();
+?>
+
+<fieldset class="admin__fieldset payment-method" id="payment_form_<?= $code ?>">
+    <div class="admin__field _required">
+        <label for="customer_taxvat" class="admin__field-label">
+            <span><?= $block->escapeHtml(__("Taxvat")) ?></span>
+        </label>
+        <div class="admin__field-control">
+            <input type="text" id="customer_taxvat" name="payment[customer_taxvat]"
+                   title="<?= $block->escapeHtml(__("Taxvat")) ?>"
+                   class="required-entry admin__control-text"/>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <event name="payment_method_assign_data_mbissonho_bancointer_boleto">
+        <observer name="mbissonho_bancointer_boleto_assign_typed_customer_taxvat_observer"
+                  instance="Mbissonho\BancoInter\Observer\Gateway\IssueBoletoDataAssignObserver"/>
+    </event>
+
+    <event name="payment_method_is_active">
+        <observer name="mbissonho_bancointer_payment_method_is_active_observer"
+                  instance="Mbissonho\BancoInter\Observer\PaymentMethodIsActiveObserver"/>
+    </event>
+
+</config>
