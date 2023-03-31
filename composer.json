@@ -1,8 +1,16 @@
 {
     "name": "mbissonho/module-bancointer",
-    "description": "",
+    "description": "Magento 2 Module Banco Inter by mbissonho",
     "type": "magento2-module",
     "version": "0.1.0",
+    "require": {
+        "guzzlehttp/guzzle": "7.5.*"
+    },
+    "authors":[
+        {
+            "name": "Mateus Bissonho(mbissonho)"
+        }
+    ],
     "autoload": {
         "files": [
             "registration.php"

@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1000" translate="label">
+            <group id="mbissonho_bancointer" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>
+                    <![CDATA[Banco Inter <i>by <span style="color: blue;" onclick="window.open('https://github.com/mbissonho');">mbissonho</span></i>]]>
+                </label>
+
+                <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                    <label>General Settings</label>
+
+                    <field id="active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="5" translate="label" type="select">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/active</config_path>
+                    </field>
+                    <field id="environment" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+                        <label>Environment</label>
+                        <source_model>Mbissonho\BancoInter\Model\Config\Source\Environment</source_model>
+                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/environment</config_path>
+                    </field>
+                    <field id="client_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="obscure">
+                        <label>Client Id</label>
+                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/client_id</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <validate>required-entry no-whitespace</validate>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="client_secret" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="21" translate="label" type="obscure">
+                        <label>Client Secret</label>
+                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/client_secret</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <validate>required-entry no-whitespace</validate>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="certificate_file" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="22" translate="label" type="file">
+                        <label>Certificate File</label>
+                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/certificate_file</config_path>
+                        <backend_model>Mbissonho\BancoInter\Model\Config\Backend\CertificateFile</backend_model>
+                        <upload_dir config="system/filesystem/var" scope_info="1">mbissonho/bancointer</upload_dir>
+                        <base_url type="var" scope_info="1">mbissonho/bancointer</base_url>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+                    <field id="ssl_key_file" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="23" translate="label" type="file">
+                        <label>SSL Key File</label>
+                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/ssl_key_file</config_path>
+                        <backend_model>Mbissonho\BancoInter\Model\Config\Backend\SSLKeyFile</backend_model>
+                        <upload_dir config="system/filesystem/var" scope_info="1">mbissonho/bancointer</upload_dir>
+                        <base_url type="var" scope_info="1">mbissonho/bancointer</base_url>
+                        <depends>
+                            <field id="active">1</field>
+                        </depends>
+                    </field>
+
+                    <field id="debug" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+                        <label>Debug</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/debug</config_path>
+                    </field>
+
+                </group>
+
+                <group id="methods" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+                    <label>Methods</label>
+
+                    <group id="boleto" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                        <label>Boleto</label>
+
+                        <field id="active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="5" translate="label" type="select">
+                            <label>Enable</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/mbissonho_bancointer_boleto/active</config_path>
+                        </field>
+
+                        <field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                            <label>Title</label>
+                            <config_path>payment/mbissonho_bancointer_boleto/title</config_path>
+                            <depends>
+                                <field id="active">1</field>
+                            </depends>
+                        </field>
+
+                        <field id="your_number" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                            <label>Your number</label>
+                            <config_path>payment/mbissonho_bancointer_boleto/your_number</config_path>
+                            <validate>required-entry integer</validate>
+                            <depends>
+                                <field id="active">1</field>
+                            </depends>
+                        </field>
+
+                        <field id="expiration_days" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                            <label>Default expiration days</label>
+                            <config_path>payment/mbissonho_bancointer_boleto/expiration_days</config_path>
+                            <validate>required-entry integer</validate>
+                            <depends>
+                                <field id="active">1</field>
+                            </depends>
+                        </field>
+
+                        <field id="days_to_cancel_after_expiration" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+                            <label>Days to cancel after expiration</label>
+                            <config_path>payment/mbissonho_bancointer_boleto/days_to_cancel_after_expiration</config_path>
+                            <validate>required-entry integer</validate>
+                            <depends>
+                                <field id="active">1</field>
+                            </depends>
+                        </field>
+
+                        <field id="cancel_when_cancel_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="select">
+                            <label>Cancel When Cancel Order</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/mbissonho_bancointer_boleto/cancel_when_cancel_order</config_path>
+                            <depends>
+                                <field id="active">1</field>
+                            </depends>
+                        </field>
+
+                        <field id="sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+                            <label>Sort Order</label>
+                            <config_path>payment/mbissonho_bancointer_boleto/sort_order</config_path>
+                            <depends>
+                                <field id="active">1</field>
+                            </depends>
+                        </field>
+
+                    </group>
+
+                </group>
+
+            </group>
+        </section>
+    </system>
+</config>

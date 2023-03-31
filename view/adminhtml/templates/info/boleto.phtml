@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var \Magento\Payment\Block\Info $block
+ * @see \Magento\Payment\Block\Info
+ */
+$title = $block->escapeHtml($block->getMethod()->getTitle());
+?>
+<dl class="payment-method">
+    <dt class="title"><?= /* @noEscape */ $title ?></dt>
+
+    <?php
+        $ourNumber = $block->getInfo()->getAdditionalInformation('our_number');
+
+        if($ourNumber) {
+            echo "<a target='_blank'
+            href='{$block->getUrl('mbissonho_bancointer/boleto/downloadpdf',
+            ['order_payment_id' => $block->getInfo()->getEntityId(), 'our_number' => $ourNumber ])}'>
+            " . __('PRINT BOLETO') . "</a><br>";
+    ?>
+
+            <dt>
+                <span><?= __('Our Number'); ?>: </span><span><?= $ourNumber ?></span>
+            </dt>
+    <?php
+        }
+    ?>
+
+
+
+</dl>
+<?= $block->getChildHtml() ?>

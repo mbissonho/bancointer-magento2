@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mbissonho_bancointer>
+            <mbissonho_bancointer_general>
+                <environment>production</environment>
+            </mbissonho_bancointer_general>
+        </mbissonho_bancointer>
+        <payment>
+            <mbissonho_bancointer_boleto>
+                <active>0</active>
+                <title>Banco Inter Boleto</title>
+                <model>BancoInterBoletoRemoteMethodAdapter</model>
+                <order_status>pending_payment</order_status>
+                <payment_action>authorize</payment_action>
+                <can_use_checkout>1</can_use_checkout>
+                <can_use_internal>1</can_use_internal>
+                <can_void>1</can_void>
+                <can_cancel>1</can_cancel>
+                <can_authorize>1</can_authorize>
+                <can_capture>1</can_capture>
+                <is_gateway>1</is_gateway>
+                <can_initialize>1</can_initialize>
+                <expiration_days>5</expiration_days>
+                <days_to_cancel_after_expiration>2</days_to_cancel_after_expiration>
+                <sort_order>1</sort_order>
+            </mbissonho_bancointer_boleto>
+        </payment>
+    </default>
+</config>
