@@ -3,8 +3,6 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
 
     <event name="admin_system_config_changed_section_payment">
-        <observer name="mbissonho_bancointer_define_webhook_url_when_payment_config_change_observer"
-                  instance="Mbissonho\BancoInter\Observer\Adminhtml\DefineWebhookUrlWhenPaymentConfigChangeObserver"/>
         <observer name="mbissonho_bancointer_define_debug_config_observer"
                   instance="Mbissonho\BancoInter\Observer\Adminhtml\DefineDebugConfigObserver"/>
     </event>

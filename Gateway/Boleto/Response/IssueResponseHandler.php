@@ -29,14 +29,14 @@ class IssueResponseHandler implements HandlerInterface
         $totalDue = $payment->getOrder()->getTotalDue();
 
         $payment->setTransactionId($responseBody->nossoNumero);
-        $payment->setIsTransactionClosed(true);
+        $payment->setIsTransactionClosed(false);
 
-        $stateObject->setData('state', Order::STATE_PENDING_PAYMENT);
-        $payment->getOrder()->setState(Order::STATE_PENDING_PAYMENT);
-        $payment->getOrder()->setStatus($payment->getOrder()->getConfig()->getStateDefaultStatus(Order::STATE_PENDING_PAYMENT));
+        $stateObject->setData('state', Order::STATE_NEW);
+        $payment->getOrder()->setState(Order::STATE_NEW);
+        $payment->getOrder()->setStatus($payment->getOrder()->getConfig()->getStateDefaultStatus(Order::STATE_NEW));
 
         $message = __('Authorized amount of %1.', $totalDue);
-        $payment->setShouldCloseParentTransaction(true);
+        $payment->setShouldCloseParentTransaction(false);
 
         $isSameCurrency = $payment->isSameCurrency();
         if (!$isSameCurrency || !$payment->isCaptureFinal($totalDue)) {

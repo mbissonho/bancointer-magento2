@@ -10,10 +10,8 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\ReadInterface;
 use Magento\Sales\Api\Data\OrderPaymentInterface;
-use Mbissonho\BancoInter\Model\Api\Client;
-use Mbissonho\BancoInter\Model\Api\CurrentEnvironmentBaseUrlResolver;
-use Mbissonho\BancoInter\Model\Config\Backend\AbstractFile;
 use Magento\Sales\Model\ResourceModel\Order\Payment as OrderPaymentResource;
+use Mbissonho\BancoInter\Model\Api\Client;
 
 class PdfDownloader
 {

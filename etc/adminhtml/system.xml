@@ -4,7 +4,9 @@
     <system>
         <section id="payment" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1000" translate="label">
             <group id="mbissonho_bancointer" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
-                <label>Banco Inter</label>
+                <label>
+                    <![CDATA[Banco Inter <i>by <span style="color: blue;" onclick="window.open('https://github.com/mbissonho');">mbissonho</span></i>]]>
+                </label>
 
                 <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
                     <label>General Settings</label>
@@ -57,14 +59,6 @@
                             <field id="active">1</field>
                         </depends>
                     </field>
-                    <field id="webhook_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
-                        <label>Webhook Url</label>
-                        <config_path>mbissonho_bancointer/mbissonho_bancointer_general/webhook_url</config_path>
-                        <validate>required-entry</validate>
-                        <depends>
-                            <field id="active">1</field>
-                        </depends>
-                    </field>
 
                     <field id="debug" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
                         <label>Debug</label>
@@ -87,7 +81,7 @@
                         </field>
 
                         <field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
-                            <label>Payment label</label>
+                            <label>Title</label>
                             <config_path>payment/mbissonho_bancointer_boleto/title</config_path>
                             <depends>
                                 <field id="active">1</field>
@@ -125,10 +119,13 @@
                             <label>Cancel When Cancel Order</label>
                             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                             <config_path>payment/mbissonho_bancointer_boleto/cancel_when_cancel_order</config_path>
+                            <depends>
+                                <field id="active">1</field>
+                            </depends>
                         </field>
 
                         <field id="sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
-                            <label>Payment method order</label>
+                            <label>Sort Order</label>
                             <config_path>payment/mbissonho_bancointer_boleto/sort_order</config_path>
                             <depends>
                                 <field id="active">1</field>

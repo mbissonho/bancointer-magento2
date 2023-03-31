@@ -8,7 +8,6 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\ReadInterface;
-use Mbissonho\BancoInter\Model\Config\Backend\AbstractFile;
 
 class ConfigProvider implements ConfigProviderInterface
 {
@@ -24,7 +23,6 @@ class ConfigProvider implements ConfigProviderInterface
     const ENVIRONMENT = 'mbissonho_bancointer/mbissonho_bancointer_general/environment';
 
     const WEBHOOK_URL = 'mbissonho_bancointer/mbissonho_bancointer_general/webhook_url';
-    const WEBHOOK_CERTIFICATE_FILE = 'mbissonho_bancointer/mbissonho_bancointer_general/webhook_certificate_file';
 
     const DEBUG = 'mbissonho_bancointer/mbissonho_bancointer_general/debug';
 
@@ -106,16 +104,6 @@ class ConfigProvider implements ConfigProviderInterface
     {
         return $this->scopeConfig->getValue(
             self::SSL_KEY_FILE,
-            'store',
-            $storeId
-        );
-    }
-
-    public function getWebhookCertificateFilePath(int $storeId = null)
-    {
-        return $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/webhook/' .
-            $this->scopeConfig->getValue(
-            self::WEBHOOK_CERTIFICATE_FILE,
             'store',
             $storeId
         );

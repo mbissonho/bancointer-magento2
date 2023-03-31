@@ -1,1 +1,4 @@
 *.txt
+/.idea/
+/vendor/
+*.lock

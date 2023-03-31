@@ -48,18 +48,16 @@ class Client
 
         $this->recreateHttpClientIfNeed($storeId);
 
-        $response = $this->client->post('/oauth/v2/token', [
-            'form_params' => [
-                'client_id' => $this->generalConfigProvider->getClientId($storeId),
-                'client_secret' => $this->generalConfigProvider->getClientSecret($storeId),
-                'grant_type' => 'client_credentials',
-                'scope' => 'boleto-cobranca.read boleto-cobranca.write'
-            ],
-            'cert' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getCertificateFilePath($storeId),
-            'ssl_key' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getSslKeyFilePath($storeId)
-        ]);
+        $response = $this->client->post('/oauth/v2/token',
+            array_merge([
+                'form_params' => [
+                    'client_id' => $this->generalConfigProvider->getClientId($storeId),
+                    'client_secret' => $this->generalConfigProvider->getClientSecret($storeId),
+                    'grant_type' => 'client_credentials',
+                    'scope' => 'boleto-cobranca.read boleto-cobranca.write'
+                ]
+            ], $this->getCommonRequestData($storeId))
+        );
 
         if($response->getStatusCode() == 200) {
             $this->authToken = json_decode($response->getBody()->getContents())->access_token;
@@ -72,34 +70,10 @@ class Client
 
         return $this->client->post(
             '/cobranca/v2/boletos',
-            [
-                'json' => $requestBody,
-                'cert' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                    $this->generalConfigProvider->getCertificateFilePath($storeId),
-                'ssl_key' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                    $this->generalConfigProvider->getSslKeyFilePath($storeId),
-                'headers' => [
-                    'Authorization' => "Bearer {$this->authToken}"
-                ]
-            ]
+            array_merge([
+                'json' => $requestBody
+            ], $this->getCommonRequestData($storeId))
         );
-    }
-
-    public function defineWebhook(string $webhookUrl, $storeId = null): void
-    {
-        $this->generateAuthToken($storeId);
-        $this->recreateHttpClientIfNeed($storeId);
-
-        $this->client->put('/cobranca/v2/boletos/webhook', [
-            'json' => ['webhookUrl' => $webhookUrl],
-            'cert' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getCertificateFilePath($storeId),
-            'ssl_key' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getSslKeyFilePath($storeId),
-            'headers' => [
-                'Authorization' => "Bearer {$this->authToken}"
-            ]
-        ]);
     }
 
     public function cancelPayment($ourNumber, $storeId = null): ResponseInterface
@@ -107,16 +81,11 @@ class Client
         $this->generateAuthToken($storeId);
         $this->recreateHttpClientIfNeed($storeId);
 
-        return $this->client->post(sprintf("/cobranca/v2/boletos/%s/cancelar", $ourNumber), [
-            'json' => ['motivoCancelamento' => 'ACERTOS'],
-            'cert' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getCertificateFilePath($storeId),
-            'ssl_key' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getSslKeyFilePath($storeId),
-            'headers' => [
-                'Authorization' => "Bearer {$this->authToken}"
-            ]
-        ]);
+        return $this->client->post(sprintf("/cobranca/v2/boletos/%s/cancelar", $ourNumber),
+            array_merge([
+                'json' => ['motivoCancelamento' => 'ACERTOS'],
+            ], $this->getCommonRequestData($storeId))
+        );
     }
 
     public function getBoletoPdf($ourNumber, $storeId = null): ResponseInterface
@@ -124,15 +93,9 @@ class Client
         $this->generateAuthToken($storeId);
         $this->recreateHttpClientIfNeed($storeId);
 
-        return $this->client->get(sprintf("/cobranca/v2/boletos/%s/pdf", $ourNumber), [
-            'headers' => [
-                'Authorization' => "Bearer {$this->authToken}"
-            ],
-            'cert' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getCertificateFilePath($storeId),
-            'ssl_key' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                $this->generalConfigProvider->getSslKeyFilePath($storeId)
-        ]);
+        return $this->client->get(sprintf("/cobranca/v2/boletos/%s/pdf", $ourNumber),
+            $this->getCommonRequestData($storeId)
+        );
     }
 
     public function getPaymentCollection($initialDate, $finalDate, $storeId = null): array
@@ -141,17 +104,8 @@ class Client
         $this->recreateHttpClientIfNeed($storeId);
 
         $response = $this->client->get(
-            sprintf("/cobranca/v2/boletos?filtrarDataPor=EMISSAO&dataInicial=%s&dataFinal=%s", $initialDate, $finalDate),
-            //sprintf("/cobranca/v2/boletos?filtrarDataPor=EMISSAO&situacao=PAGO&dataInicial=%s&dataFinal=%s", $initialDate, $finalDate),
-            [
-                'headers' => [
-                    'Authorization' => "Bearer {$this->authToken}"
-                ],
-                'cert' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                    $this->generalConfigProvider->getCertificateFilePath($storeId),
-                'ssl_key' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
-                    $this->generalConfigProvider->getSslKeyFilePath($storeId)
-            ]
+            sprintf("/cobranca/v2/boletos?filtrarDataPor=EMISSAO&situacao=PAGO&dataInicial=%s&dataFinal=%s", $initialDate, $finalDate),
+            $this->getCommonRequestData($storeId)
         );
 
         $payments = [];
@@ -172,6 +126,24 @@ class Client
                 ['base_uri' => $this->currentEnvironmentBaseUrlResolver->getApiBaseUrlByCurrentEnvironmentByScopeConfig($storeId)]
             );
         }
+    }
+
+    private function getCommonRequestData($storeId = null): array
+    {
+        $data = [
+            'cert' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
+                $this->generalConfigProvider->getCertificateFilePath($storeId),
+            'ssl_key' => $this->_varDirectory->getAbsolutePath(AbstractFile::UPLOAD_DIR) . '/' .
+                $this->generalConfigProvider->getSslKeyFilePath($storeId)
+        ];
+
+        if($this->authToken != null) {
+            $data['headers'] =  [
+                'Authorization' => "Bearer {$this->authToken}"
+            ];
+        }
+
+        return $data;
     }
 
 }

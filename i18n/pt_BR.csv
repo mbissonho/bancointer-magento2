@@ -22,4 +22,13 @@
 
 "==== LABELS ====", "==== LABELS ===="
 
+"Methods", "Métodos"
+"Cancel When Cancel Order", "Cancelar ao cancelar o pedido"
 "Taxvat", "CPF/CNPJ"
+"Your number", "Seu número"
+"Default expiration days", "Dias para vencimento padrão"
+"Days to cancel after expiration", "Dias para cancelar após o vencimento"
+"Certificate File", "Arquivo do Certificado"
+"SSL Key File", "Arquivo da Chave Privada"
+
+
