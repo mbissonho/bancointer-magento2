@@ -40,7 +40,7 @@
                         </depends>
                     </field>
                     <field id="certificate_file" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="22" translate="label" type="file">
-                        <label>Certificate File</label>
+                        <label>Certificate File (.crt file)</label>
                         <config_path>mbissonho_bancointer/mbissonho_bancointer_general/certificate_file</config_path>
                         <backend_model>Mbissonho\BancoInter\Model\Config\Backend\CertificateFile</backend_model>
                         <upload_dir config="system/filesystem/var" scope_info="1">mbissonho/bancointer</upload_dir>
@@ -50,7 +50,7 @@
                         </depends>
                     </field>
                     <field id="ssl_key_file" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="23" translate="label" type="file">
-                        <label>SSL Key File</label>
+                        <label>SSL Key File (.key file)</label>
                         <config_path>mbissonho_bancointer/mbissonho_bancointer_general/ssl_key_file</config_path>
                         <backend_model>Mbissonho\BancoInter\Model\Config\Backend\SSLKeyFile</backend_model>
                         <upload_dir config="system/filesystem/var" scope_info="1">mbissonho/bancointer</upload_dir>
@@ -83,15 +83,6 @@
                         <field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
                             <label>Title</label>
                             <config_path>payment/mbissonho_bancointer_boleto/title</config_path>
-                            <depends>
-                                <field id="active">1</field>
-                            </depends>
-                        </field>
-
-                        <field id="your_number" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
-                            <label>Your number</label>
-                            <config_path>payment/mbissonho_bancointer_boleto/your_number</config_path>
-                            <validate>required-entry integer</validate>
                             <depends>
                                 <field id="active">1</field>
                             </depends>

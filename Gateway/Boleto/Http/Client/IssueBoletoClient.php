@@ -30,7 +30,7 @@ class IssueBoletoClient implements ClientInterface
             $requestData = $transferObject->getBody();
 
             $requestBody = [
-                'seuNumero' => $requestData['transaction']['your_number'],
+                'seuNumero' => $requestData['order_increment_id'],
                 'valorNominal' => $requestData['transaction']['amount'],
                 'dataVencimento' => $requestData['transaction']['expiration_date'],
                 'numDiasAgenda' => $requestData['transaction']['days_to_cancel_after_expiration'],
