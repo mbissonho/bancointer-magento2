@@ -24,7 +24,6 @@ class IssueBoletoBuilder extends AbstractBuilder
 
             return [
                 'transaction' => [
-                    'your_number' => $methodInstance->getConfigData('your_number', $storeId),
                     'days_to_cancel_after_expiration' => intval($methodInstance->getConfigData('days_to_cancel_after_expiration', $storeId)),
                     'expiration_date' => $expirationDate,
                     'amount' => $order->getGrandTotalAmount()

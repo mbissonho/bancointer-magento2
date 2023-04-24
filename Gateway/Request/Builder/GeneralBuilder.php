@@ -15,8 +15,7 @@ class GeneralBuilder extends AbstractBuilder
             $paymentDataObject = SubjectReader::readPayment($buildSubject);
             return [
                 Store::STORE_ID => $paymentDataObject->getOrder()->getStoreId(),
-                'order_increment_id' => $paymentDataObject->getOrder()->getOrderIncrementId(),
-                'order_id' => $paymentDataObject->getOrder()->getId()
+                'order_increment_id' => $paymentDataObject->getOrder()->getOrderIncrementId()
             ];
         } catch (\Throwable $e) {
             $this->logger->critical($e);
