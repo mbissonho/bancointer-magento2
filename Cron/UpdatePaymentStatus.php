@@ -57,7 +57,7 @@ class UpdatePaymentStatus
                 $collection = $this->orderCollectionFactory->create();
                 $collection
                     ->addFieldToSelect('*')
-                    ->addFieldToFilter('state', ['eq' => Order::STATE_PENDING_PAYMENT])
+                    ->addFieldToFilter('state', ['eq' => Order::STATE_NEW])
                     ->addFieldToFilter('store_id', ['eq' => $storeId ])
                     ->join(
                         ['sop' => $collection->getTable('sales_order_payment')],
