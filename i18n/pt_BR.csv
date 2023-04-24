@@ -28,7 +28,8 @@
 "Your number", "Seu número"
 "Default expiration days", "Dias para vencimento padrão"
 "Days to cancel after expiration", "Dias para cancelar após o vencimento"
-"Certificate File", "Arquivo do Certificado"
-"SSL Key File", "Arquivo da Chave Privada"
+"Certificate File (.crt file)", "Arquivo do Certificado (arquivo .crt)"
+"SSL Key File (.key file)", "Arquivo da Chave Privada (arquivo .key)"
+"Payment Identifier", "Identificador do Pagamento"
 
 
