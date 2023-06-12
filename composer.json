@@ -2,7 +2,7 @@
     "name": "mbissonho/module-bancointer",
     "description": "Magento 2 Module Banco Inter by mbissonho",
     "type": "magento2-module",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "require": {
         "guzzlehttp/guzzle": "7.5.*"
     },
