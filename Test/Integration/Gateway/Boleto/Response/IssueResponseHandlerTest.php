@@ -9,7 +9,7 @@ use Mbissonho\BancoInter\Test\Integration\Gateway\AbstractGatewayTestCase;
 
 class IssueResponseHandlerTest extends AbstractGatewayTestCase
 {
-    private IssueResponseHandler $issueResponseHandler;
+    private ?IssueResponseHandler $issueResponseHandler;
 
     protected function setUp(): void
     {
